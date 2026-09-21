@@ -1,0 +1,26 @@
+# Unreal Engine 5 C++ & Style Rules
+
+## Allar Style Guide Naming Conventions
+- **Class Prefixes:**
+  - `A` for Actors (e.g., `AMyCharacter`)
+  - `U` for Objects and Components (e.g., `UQuestLocatorComponent`)
+  - `F` for Structs (e.g., `FQuestData`)
+  - `E` for Enums (e.g., `EQuestState`)
+  - `I` for Interfaces (e.g., `IInteractableInterface`)
+  - `T` for Templates / Collections
+- **Variables & Functions:**
+  - Use `PascalCase` for all variable names, functions, structs, and enums (e.g., `CurrentHealth`, `GetTargetLocation()`).
+  - Boolean variables MUST start with a lowercase `b` prefix (e.g., `bIsActive`, `bCanDoubleJump`).
+- **Assets & References:**
+  - Prefix Blueprints with `BP_` (e.g., `BP_QuestLocator`).
+  - Prefix Materials with `M_` and Material Instances with `MI_`.
+
+## Core Architecture
+- Always include "CoreMinimal.h" before any other header files.
+- Generated headers (`#include "YourClass.generated.h"`) MUST always be the LAST include in the header file.
+- Use `TObjectPtr<UCLASS>` for member pointers exposed to the engine instead of raw pointers.
+- Always decorate member fields exposed to Editor or Blueprints with `UPROPERTY()` and appropriate `EditAnywhere`/`BlueprintReadWrite` tags.
+- Mark functions intended for Blueprint exposure with `UFUNCTION(BlueprintCallable)`.
+
+## Build System
+- If adding a new engine module (e.g., `NavigationSystem`, `Niagara`, `EnhancedInput`), update `YourProject.Build.cs` by adding the module string to `PublicDependencyModuleNames`.
